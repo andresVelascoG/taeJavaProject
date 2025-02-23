@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class FullTimeTeacher extends Teacher{
     protected int xpYears;
 
-    public FullTimeTeacher(int xpYears, int id, String name, int age, double baseSalary) {
+    public FullTimeTeacher(int id, String name, int age, double baseSalary, int xpYears) {
         super(id, name, age, baseSalary);
         this.xpYears=xpYears;
     }
