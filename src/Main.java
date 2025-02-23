@@ -1,6 +1,5 @@
-import university.FullTimeTeacher;
-import university.PartTimeTeacher;
-import university.Student;
+import university.*;
+import university.Class;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,17 +8,17 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Hello administrator! Welcome to Andres's University");
-        FullTimeTeacher fTeacher1 = new FullTimeTeacher("");
-        FullTimeTeacher fTeacher2 = new FullTimeTeacher("");
-        PartTimeTeacher pTeacher1 = new PartTimeTeacher("");
-        PartTimeTeacher pTeacher2 = new PartTimeTeacher("");
+        FullTimeTeacher fTeacher1 = new FullTimeTeacher(1,"Anderson",30,50000,10);
+        FullTimeTeacher fTeacher2 = new FullTimeTeacher(2,"Laura",26,45000,4);
+        PartTimeTeacher pTeacher1 = new PartTimeTeacher(3,"Valeria",22,38000,15);
+        PartTimeTeacher pTeacher2 = new PartTimeTeacher(4,"Carlos",45,67000, 26);
 
-        Student student1 = new Student();
-        Student student2 = new Student();
-        Student student3 = new Student();
-        Student student4 = new Student();
-        Student student5 = new Student();
-        Student student6 = new Student();
+        Student student1 = new Student(101, "Andres", 22);
+        Student student2 = new Student(102, "Andrea", 18);
+        Student student3 = new Student(103, "Juan", 19);
+        Student student4 = new Student(104, "Camila", 20);
+        Student student5 = new Student(105, "Sebastian", 20);
+        Student student6 = new Student(106, "Jose", 23);
 
         ArrayList<Student> studentsClass1 = new ArrayList<>();
         studentsClass1.add(student1);
@@ -31,7 +30,29 @@ public class Main {
         studentsClass2.add(student3);
         studentsClass2.add(student6);
 
-        SuperMarket mySupermarket = new SuperMarket(firstProduct);
+        Class javaClass = new Class(1,"Java","203",studentsClass1,fTeacher1);
+        Class algebraClass = new Class(2,"Lineal Algebra","102",studentsClass2,pTeacher1);
+
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        teachers.add(fTeacher1);
+        teachers.add(fTeacher2);
+        teachers.add(pTeacher1);
+        teachers.add(pTeacher2);
+
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(student1);
+        students.add(student2);
+        students.add(student3);
+        students.add(student4);
+        students.add(student5);
+        students.add(student6);
+
+        ArrayList<Class> classes = new ArrayList<>();
+        classes.add(javaClass);
+        classes.add(algebraClass);
+
+        University andresU = new University(students,teachers, classes);
+
         while(true){
             //scan.nextLine();
             System.out.println("Select a action to perform by typing the number of the action:\n" +
