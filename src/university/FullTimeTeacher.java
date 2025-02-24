@@ -6,7 +6,7 @@ public class FullTimeTeacher extends Teacher{
     protected int xpYears;
 
     public FullTimeTeacher(int id, String name, int age, double baseSalary, int xpYears) {
-        super(id, name, age, baseSalary);
+        super(id, name, age, baseSalary, "Full time");
         this.xpYears=xpYears;
     }
 

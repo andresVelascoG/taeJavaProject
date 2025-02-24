@@ -1,5 +1,7 @@
 import university.*;
 import university.Class;
+import university.write.StudentWriter;
+import university.write.UniversityWriter;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -52,50 +54,82 @@ public class Main {
         classes.add(algebraClass);
 
         University andresU = new University(students,teachers, classes);
-
         while(true){
             //scan.nextLine();
+            System.out.println("");
             System.out.println("Select a action to perform by typing the number of the action:\n" +
-                    "1. Add a product\n" +
-                    "2. List the products\n" +
-                    "3. Sell a quantity of a product\n" +
-                    "4. Remove a product\n" +
-                    "5. Exit from this menu");
+                    "1. Print all the professors\n" +
+                    "2. Print all the classes\n" +
+                    "3. Create a student and add it to a class\n" +
+                    "4. Create a new class\n" +
+                    "5. List all the classes of a student\n" +
+                    "6. Exit from this menu");
             int selection = scan.nextInt();
             switch (selection){
                 case 1:
-                    scan.nextLine();
-                    System.out.println("Insert the name of the product to add:");
-                    String name = scan.nextLine();
-                    System.out.println("Insert the quantity of the product:");
-                    int quantity = scan.nextInt();
-                    System.out.println("Insert the price of the product:");
-                    double price = scan.nextDouble();
-                    Product newProduct = new Product(name,quantity,price);
-                    mySupermarket.addProduct(newProduct);
+                    UniversityWriter.teachersInfo(andresU);
                     break;
                 case 2:
-                    mySupermarket.listProducts();
+                    System.out.println("--------------------------");
+                    UniversityWriter.classesNames(andresU);
+                    System.out.println("Select the number of the class to print all its information");
+                    int selectedClass = scan.nextInt();
+                    UniversityWriter.classInfo(andresU, selectedClass);
+
                     break;
                 case 3:
                     scan.nextLine();
-                    mySupermarket.listProducts();
-                    System.out.println("Insert the index of the product ");
-                    int index = scan.nextInt();
-                    System.out.println("Insert the quantity of the product ");
-                    int productQuantity = scan.nextInt();
-                    mySupermarket.sellProduct(index, productQuantity);
+                    System.out.println("Insert the name of the student");
+                    String studentName = scan.nextLine();
+                    System.out.println("Insert the age of the student ");
+                    int studentAge = scan.nextInt();
+                    System.out.println("--------------------------");
+                    UniversityWriter.classesNames(andresU);
+                    System.out.println("Select the class to enroll the student ");
+                    int classIndex = scan.nextInt();
+                    andresU.enrollStudent(studentName, studentAge, classIndex-1);
+
                     break;
                 case 4:
-                    mySupermarket.listProducts();
-                    System.out.println("Insert the index of the product to delete");
-                    int deleteIndex = scan.nextInt();
-                    mySupermarket.deleteProduct(deleteIndex);
+                    scan.nextLine();
+                    System.out.println("Insert the name of the class");
+                    String className = scan.nextLine();
+                    System.out.println("Insert the classroom of the class ");
+                    String classroom = scan.nextLine();
+                    System.out.println("--------------------------");
+                    UniversityWriter.teachersInfo(andresU);
+                    System.out.println("Select a professor for the class ");
+                    int teacherIndex = scan.nextInt();
+                    System.out.println("--------------------------");
+                    ArrayList<Student> studentsArray = new ArrayList<>();
+                    boolean addStudent = true;
+                    do{
+                        UniversityWriter.studentsNames(andresU);
+                        System.out.println("Select the index of the student to add");
+                        int addedStudent = scan.nextInt();
+                        studentsArray.add(andresU.getStudents().get(addedStudent-1));
+                        System.out.println("Would you like to add another student?" +
+                                "\n 1. Yes" +
+                                "\n 2. No");
+                        int addStudentSelection = scan.nextInt();
+                        if(addStudentSelection == 2){
+                            addStudent = false;
+                        }
+                    }while (addStudent);
+                    andresU.createClass(className, classroom, teacherIndex-1, studentsArray);
                     break;
-                default:
+                case 5:
+                    UniversityWriter.studentsNames(andresU);
+                    System.out.println("Insert the id of the student to search its classes");
+                    int studentIndex = scan.nextInt();
+                    UniversityWriter.studentClassesInfo(andresU,studentIndex-1);
+                    break;
+                case 6:
                     System.out.println("Exiting the program.");
                     scan.close();
                     return;
+                default:
+                    break;
             }
         }
     }
