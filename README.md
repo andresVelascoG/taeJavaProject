@@ -29,7 +29,7 @@ cd taeJavaProject
 
 ```
 
-##Compiling and Running the Java Exercise
+## Compiling and Running the Java Exercise
 1. Navigate to the src folder:
 ```bash
 cd src
